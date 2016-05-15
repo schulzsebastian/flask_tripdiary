@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>TripDiary</title>
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+        <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/Control.OSMGeocoder.js') }}" />
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/geocoder/Control.OSMGeocoder.js') }}"></script>
+    </head>
+    <body>
+        <div class="row">
+            <nav>
+                <div class="teal lighten-2 nav-wrapper">
+                    <a href="/dashboard" class="brand-logo center">tripdiary</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    {% if g.user.is_authenticated %}
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="/global">Global</a></li>
+                        <li><a href="/map">Your Map</a></li>
+                        <li><a href="/logout"><i class="large material-icons tooltipped" data-tooltip="Logout">power_settings_new</i></a></li>
+                    </ul>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a>Hello, {{ g.user.username }}!</a></li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                    <script>
+                        $(".button-collapse").sideNav();
+                        $(".dropdown-button").dropdown();
+                    </script>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
